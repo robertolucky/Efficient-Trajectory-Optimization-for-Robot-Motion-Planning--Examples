@@ -3,7 +3,7 @@ function [ lb,ub,bnds ] = bounds( npts,init,target,prob )
 
 rob = prob.rob;
 
-% bounds for velocity, torque, and torque rate
+% bounds for position velocity, torque, and torque rate
 posinf=rob.r.Qlim(1,:).'; 
 possup=rob.r.Qlim(2,:).';
 
@@ -15,7 +15,7 @@ dtrqbnd=30*trqbnd;
 bnds = [posinf,possup,velbnd,trqbnd,dtrqbnd];
 
 limit=1;% of limit of every bound
-interpLimit=0.8; % for test case
+interpLimit=0.8; % for test case bisogna cambiarlo in base ai pnts
 % interpLimit=0.68;% considering interpolation using 20 pnts, addition limit
 % interpLimit=0.7;% considering interpolation using 12 pnts, addition limit
 conlb = -[-posinf;velbnd;trqbnd;dtrqbnd]*limit*interpLimit;
@@ -57,6 +57,7 @@ for k=1:size(prob.wallmap,2)
     wlb=[wlb;r+0.05];
     wub=[wub;10000];
 end
+
 lb=[lb;kron(ones(npts,1),wlb)];
 ub=[ub;kron(ones(npts,1),wub)];
 % obstacle collision

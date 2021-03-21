@@ -1,4 +1,4 @@
-function dX = robDyn( X,u,rob )
+function dX = robKin( X,u,rob )
 % simple 6D robot kinematics
 n=6;
 A = [zeros(n),eye(n),zeros(n);
@@ -7,8 +7,5 @@ A = [zeros(n),eye(n),zeros(n);
 B = [zeros(n);zeros(n);eye(n)];
 dX = A*X + B*u;
 dX=dX(:);
-
-
-
 end
 

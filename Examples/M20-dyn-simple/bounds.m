@@ -5,7 +5,7 @@ function [ lb,ub, bnds ] = bounds( npts,init,target,rob )
 posinf=rob.r.Qlim(1,:).'; 
 possup=rob.r.Qlim(2,:).';
 
-velbnd=rob.r.QDlim(2,:).';
+velbnd=rob.r.QDlim(2,:).'; %bisognerebbe modificare questo
 
 trqbnd=0.8*[1396.5,1402.3,382.7,45.2,44.6,32.5].';
 dtrqbnd=30*trqbnd;

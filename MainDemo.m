@@ -29,6 +29,9 @@
 % After initialization, fast optimization can be performed when target
 % changed.
 clear all;clc;close all;
+addpath 'D:\documenti\Documenti Uni\TESI\chebfun'
+addpath 'D:\documenti\Documenti Uni\TESI\casadi-windows-matlabR2016a-v3.5.5'
+
 addpath(genpath('./Core'));
 addpath(genpath('Examples/FromARTE'));
 message = {"Available demos:",...

@@ -1,24 +1,24 @@
 function [ ret ] = conIneq( Xc,Uc,D,scale,prob )
 % inequality constraint
-nS = 12;
+nS = 12; %numero di stati
 nU = 6;
-npts = numel(Xc)/nS;
-Xc = reshape(Xc,nS,npts);
+npts = numel(Xc)/nS; %numero di nodi
+Xc = reshape(Xc,nS,npts); %prime 6 posizioni, seconde 6 velocità
 Uc = reshape(Uc,nU,npts);
-Acc = (D*(Xc(7:12,:).')/scale).';
-Jerk = (D*(Acc.')/scale).';
-Ucd = (D*(Uc.')/scale).';
+Acc = (D*(Xc(7:12,:).')/scale).'; %ecco come fa la derivata
+Jerk = (D*(Acc.')/scale).';       %usando la matrice D
+Ucd = (D*(Uc.')/scale).';      
 % pos, velocity, torque constraints, considering motor feedforward
-temp = [Xc;...
+temp = [Xc;...   % temp sta per temporary variable -.-
     Uc;...
     Ucd];
 
 
 ret = [temp(:);...
-    Xc(1:6,1);...
-    Xc(7:12,1);...
-    Acc(:,1);...
-    Jerk(:,1);...
+    Xc(1:6,1);... % posizini
+    Xc(7:12,1);... %velocità
+    Acc(:,1);...% accelerazioni
+    Jerk(:,1);... %jerk
     prob.rob.tcpPos(Xc(1:6,end));...
     Xc(7:12,end);...
     Acc(:,end);...

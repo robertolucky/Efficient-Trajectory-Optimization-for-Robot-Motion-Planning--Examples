@@ -5,20 +5,22 @@
 %   acceleration bound. Obstacle is also considered.
 % 
 % author: Yu Zhao, yzhao334@berkeley.edu
-
+close all
+clear all
 %% set up parameter
 prob.rob = rob_params;
 prob.time = linspace(0,9.9,100);
 %% set up optimal control problem
 prob.init = [0;-pi/4];
-prob.target = [pi/2;0];% joint space target position
+prob.target = [-pi/3-pi;-1];% joint space target position
 ps=PseudoOptimal;
-ps.npts=20;
-ps.nS=6;
-ps.nU=2;
-ps.sGuess=interp1([0;10],[prob.init(1),prob.init(2),0,0,0,0;prob.target(1),prob.target(2),0,0,0,0],prob.time(:));
-prob.u_init=zeros(length(prob.time),2);
-prob.init=ps.sGuess(1,:).';
+ps.npts=15; %numero di nodi intermezzi
+ps.nS=6; % dimensione degli stati: 2 angoli x posizione, velocità e accelerazione
+ps.nU=2; %dimensione del controllo  (torque)
+ps.sGuess=interp1([0;10],[prob.init(1),prob.init(2),0,0,0,0;...
+    prob.target(1),prob.target(2),0,0,0,0],prob.time(:)); %initial guess è una linea dritta
+prob.u_init=zeros(length(prob.time),2); %inizializzazione del cotnrollo a zero
+prob.init=ps.sGuess(1,:).'; %inizializzazione della prima posizione degli stati
 [prob.lb,prob.ub]=bounds(ps.npts,prob.rob);
 %% solve optimal control
 [opt.Xc,opt.Uc,opt.Tc,opt.Xopt,opt.Uopt,opt.Topt] = ...

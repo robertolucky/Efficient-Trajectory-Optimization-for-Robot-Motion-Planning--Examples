@@ -63,7 +63,7 @@ roty=@(x)[cos(x),0,-sin(x);0,1,0;sin(x),0,cos(x)].';
 state_record=[];control_record=[];time_record=[];
 %% task 1
 prob.init = [0 0 0 0 0 0];% joint space initial position
-prob.target = [0,0,-pi/2,0,0,0];% joint space target position
+prob.target = [0,1,-pi/2,0,0,0];% joint space target position
 prob.targetPos = prob.rob.tcpPos(prob.target);
 disp(['Initial pos [',num2str(prob.init(:).'),']']);
 disp(['Target pos [',num2str(prob.targetPos(:).'),']']);

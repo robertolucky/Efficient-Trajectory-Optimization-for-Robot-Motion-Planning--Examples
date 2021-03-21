@@ -6,7 +6,7 @@ Uc = reshape(Uc,nU,numel(Uc)/nU);
 defects = (D*(Xc.')/scale).';
 defects = defects(:);
 
-defects = defects - robDyn(Xc,Uc,rob);
+defects = defects - robKin(Xc,Uc,rob);
 
 end
 

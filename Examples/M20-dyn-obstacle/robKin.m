@@ -11,7 +11,7 @@ function dX = robDyn( X,u,rob )
 %   u = [6, n] = [u] = control to the robot
 %           u = torque of joints
 
-dX = rob.FDynVec( X, u );
+dX = rob.FDynVec( X, u ); %in RobABA dentro robotics, dentro utils
 
 
 end
